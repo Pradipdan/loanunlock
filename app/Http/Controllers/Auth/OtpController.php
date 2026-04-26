@@ -118,9 +118,12 @@ class OtpController extends Controller
         $otp = $this->generateOtp();
 
         try {
-            $response = Http::timeout(10)->get(
-                "https://2factor.in/API/V1/{$apiKey}/SMS/{$mobile}/{$otp}"
-            );
+            $template = rawurlencode(env('TWOFACTOR_TEMPLATE', 'AUTOGEN'));
+            $url = "https://2factor.in/API/V1/{$apiKey}/SMS/+91{$mobile}/{$otp}/{$template}";
+            Log::info('2Factor SMS URL: ' . preg_replace('/V1\/[^\/]+\//', 'V1/***/', $url));
+
+            $response = Http::timeout(10)->get($url);
+            Log::info('2Factor SMS response: ' . $response->body());
 
             $body = $response->json();
 
