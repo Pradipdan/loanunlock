@@ -57,7 +57,7 @@ class OtpController extends Controller
             ],
             [
                 'route'   => 'q',
-                'message' => "{$otp} is your SmartLoan OTP. Valid for 10 minutes. Do NOT share this with anyone. SmartLoan never asks for your OTP.\n\n- Team SmartLoan",
+                'message' => "Your verification code is {$otp}",
                 'flash'   => 0,
                 'numbers' => $mobile,
             ],
