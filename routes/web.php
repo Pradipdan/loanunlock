@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminLoanController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\StorePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,12 @@ use App\Http\Controllers\Admin\AdminUserController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('splash');
-});
+    return view('ecommerce.index');
+})->name('home');
+
+// Store Payment (public – no auth needed)
+Route::post('/store/create-order', [StorePaymentController::class, 'createOrder'])->name('store.create.order');
+Route::post('/store/verify-payment', [StorePaymentController::class, 'verifyOrder'])->name('store.verify.payment');
 
 // Fast2SMS website verification (for unlocking OTP route)
 // Set FAST2SMS_VERIFY_TOKEN in .env with the token from Fast2SMS dashboard

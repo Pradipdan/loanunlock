@@ -25,7 +25,7 @@ class OtpController extends Controller
     // ─────────────────────────────────────────────────────────────────────────
     private function sendOtpViaSms(string $mobile): array
     {
-        $provider = env('OTP_PROVIDER', 'demo');
+        $provider = strtolower(env('OTP_PROVIDER', 'demo'));
 
         return match($provider) {
             'fast2sms' => $this->sendViaFast2Sms($mobile),
@@ -170,7 +170,7 @@ class OtpController extends Controller
     // ─────────────────────────────────────────────────────────────────────────
     private function verifyOtpViaSms(string $sessionId, string $otpCode, ?string $storedOtp = null): bool
     {
-        $provider = env('OTP_PROVIDER', 'demo');
+        $provider = strtolower(env('OTP_PROVIDER', 'demo'));
 
         // Fast2SMS and demo: verify against DB-stored OTP
         if ($provider === 'fast2sms' || $sessionId === 'DEMO_SESSION' || $sessionId === 'DB_VERIFY') {
