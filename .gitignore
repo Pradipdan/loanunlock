@@ -29,3 +29,10 @@ yarn-error.log
 /.vscode
 /.claude
 .DS_Store
+
+# Mobile app (separate repo)
+loanunlock-mobile/
+
+# Uploaded documents
+storage/app/documents/
+package-lock.json
